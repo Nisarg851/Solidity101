@@ -1,4 +1,4 @@
-pragma ^0.6.0;
+pragma solidity ^0.6.0;
 contract VisibilityAndFunctions{
     // visibility Defines the scope for a variable or a function in which they can be used
     // There are 4 types of visibilties in solidity
@@ -13,22 +13,23 @@ contract VisibilityAndFunctions{
     int8 internal var3 = 10;    // Can be accessed by only this and its children contracts
     int8 private var4 = 10;     // Can be accessed inside this contract only
 
-    //Types of function
-    //--> Simple functions:- This are normal functions like any other language
-    function fun1(uint par1) return(uint){
-        uint temp = par1+par1;
+    // Types of function
+    // Simple functions:- Functions that performs task which can manipulate the state of contract
+    function fun1(int8 par1) public{
+        var4 = par1;        // here var4 variable is changed hence the state of contract has changed
+    }
+
+    //--> view functions:- Functions that performs tasks which requires the state of contract
+    //--> "view" keyword specifies that the function can only view the state of contract but not modify it
+    //--> ** Similar to getter methods in OOP langs**
+    function fun2(int8 par1) public view returns(int8){
+        int8 temp = par1 + var4;
         return temp;
     }
 
-    //--> view functions:- Provides read only access, similar to getter methods
-    //--> *** read access is provided according to the visibility of the scope ***
-    function fun2() public view return(uint){
-        return var4;
-    }
-
-    //--> pure functions:- Provides write only access, similar to setter methods
-    //--> *** write access is provided according to the visibility of the scope ***
-    function fun3(uint newValue) public pure{
-        var4 = newValue;
+    //--> pure functions:- Functions that perform tasks that does not change or view the state of contract
+    function fun3(int8 newValue) public pure returns(int8){
+        int8 temp = newValue + newValue;
+        return temp;
     }
 }
