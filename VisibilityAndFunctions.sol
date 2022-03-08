@@ -1,15 +1,16 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 contract VisibilityAndFunctions{
     // visibility Defines the scope for a variable or a function in which they can be used
     // There are 4 types of visibilties in solidity
     // 1. public :- Defines that the variable/function can be used by this(current/parent contract) as well as outside contracts.
-    // 2. external :- Defines that the variable/function can be used by the outside contracts only.
+    // 2. external :- Defines that the function can be used by the outside contracts only.
     // 3. internal :- Defines that the variable/function can be used by only this(current/parent contract) and its sub/children contracts.
     // 4. private :- Defines that the variable/function can be used by this(current/parent contract) contract only.
 
     // for ex:
     int8 public var1 = 10;      // Can be accessed by any contract directly
-  //  int8 external var2 = 10;    // Can be accessed by any contract except this one
+    //int8 external var2 = 10;    // "external" can't be used with varibles cause theres no point of that
     int8 internal var3 = 10;    // Can be accessed by only this and its children contracts
     int8 private var4 = 10;     // Can be accessed inside this contract only
 
@@ -19,7 +20,7 @@ contract VisibilityAndFunctions{
         var4 = par1;        // here var4 variable is changed hence the state of contract has changed
     }
 
-    //--> view functions:- Functions that performs tasks which requires the state of contract
+    //--> view functions:- Functions that performs tasks which requires to view the state of contract
     //--> "view" keyword specifies that the function can only view the state of contract but not modify it
     //--> ** Similar to getter methods in OOP langs**
     function fun2(int8 par1) public view returns(int8){
